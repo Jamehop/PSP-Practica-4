@@ -28,7 +28,9 @@ public class HttpClient {
 		}
 
 		System.out.println("1. Iniciar sesion\n2. Cerrar sesion\n3. Listar ficheros y directorios\n4. Subir fichero"
-				+ "\n5. Descargar fichero del servidor\n8. Crear directorio\n0. Salir");
+				+ "\n5. Descargar fichero del servidor\n6. Eliminar fichero\n7. Eliminar directorio"
+				+ "\n8. Crear directorio\n9. Cambiar el directorio actual\n10. Establecer conexion remotamente"
+				+ "\n11. Añadir interfaz grafica\n0. Salir");
 		int opcion = Leer.pedirEnteroValidar();
 		while (opcion != 0) {
 			switch (opcion) {
@@ -87,7 +89,7 @@ public class HttpClient {
 				break;
 			case 5:
 				System.out.println("Introduce el nombre del fichero que se quiere descargar");
-				String remoteFile1 = "/test/video.mp4";
+				String remoteFile1 = "/Lol.txt";
 	            File downloadFile1 = new File("C:\\Users\\1DAM\\Desktop\\imagen.jpeg");
 	            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1));
 	            boolean success = ftpClient.retrieveFile(remoteFile1, outputStream1);
@@ -101,8 +103,30 @@ public class HttpClient {
 				
 				break;
 			case 6:
+				System.out.println("Introduce el nombre del fichero a eliminar");
+				String aEliminar=Leer.pedirCadena();
+				String filename = "/"+aEliminar+".txt";
+
+				boolean exist = ftpClient.deleteFile(filename);
+				 
+				// Notify user for deletion 
+				if (exist) {
+				    System.out.println("Fichero '"+ filename + "' eliminado...");
+				}
+				else System.out.println("Fichero '"+ filename + "' no existe...");
 				break;
 			case 7:
+				System.out.println("Introduce el nombre del directorio a eliminar");
+				String aEliminar2=Leer.pedirCadena();
+				String filename2 = "/"+aEliminar2+".txt";
+
+				boolean exist2 = ftpClient.removeDirectory(filename2);
+				 
+				// Notify user for deletion 
+				if (exist2) {
+				    System.out.println("Directorio '"+ filename2 + "' eliminado...");
+				}
+				else System.out.println("Directorio '"+ filename2 + "' no existe...");
 				break;
 			case 8:
 				System.out.println("Dime el nombre del directorio a crear:");
@@ -115,10 +139,21 @@ public class HttpClient {
 					System.out.println("Error al crear directorio.");
 				}
 				break;
+			case 9:
+				break;
+			case 10:
+				break;
+			case 11:
+				break;
 			default:
+				System.out.println("Valor no valido");
 				break;
 			}
 
+			System.out.println("1. Iniciar sesion\n2. Cerrar sesion\n3. Listar ficheros y directorios\n4. Subir fichero"
+					+ "\n5. Descargar fichero del servidor\n6. Eliminar fichero\n7. Eliminar directorio"
+					+ "\n8. Crear directorio\n9. Cambiar el directorio actual\n10. Establecer conexion remotamente"
+					+ "\n11. Añadir interfaz grafica\n0. Salir");
 			opcion = Leer.pedirEnteroValidar();
 		}
 
