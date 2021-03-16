@@ -68,11 +68,11 @@ public class HttpClient {
 
 				break;
 			case 4:
-
+				//C:\Users\1DAM\Desktop\Filezilla
 				System.out.println("Dime el nombre del fichero:");
 				// "commons-net-3.6.jar"
 				String remote_filename = "subida.txt";
-				String local_filepath = "C:\\Users\\Jame Ops\\Desktop\\Filezilla";
+				String local_filepath = "C:\\Users\\1DAM\\Desktop\\Otra carpeta";
 				FileInputStream fis = new FileInputStream(local_filepath+"\\"+remote_filename);
 				boolean uploadFile = ftpClient.storeFile(remote_filename, fis);
 				if (uploadFile == false) {
@@ -84,7 +84,7 @@ public class HttpClient {
 			case 5:
 				System.out.println("Introduce el nombre del fichero que se quiere descargar");
 				String remoteFile1 = "descarga.txt";
-	            File downloadFile1 = new File("C:\\Users\\Jame Ops\\Desktop");
+	            File downloadFile1 = new File("C:\\Users\\1DAM\\Desktop\\Otra carpeta");
 	            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1+"\\"+remoteFile1));
 	            boolean success = ftpClient.retrieveFile(remoteFile1, outputStream1);
 	            outputStream1.close();
