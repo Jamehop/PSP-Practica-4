@@ -68,18 +68,12 @@ public class HttpClient {
 
 				break;
 			case 4:
-				System.out.println("Indica la ruta a la que quieres subir el fichero:");
-				// "C:/Users/1DAM/Desktop/Filezilla/"
-				String remote_working_dir_path = Leer.pedirCadena();
-				ftpClient.enterLocalPassiveMode();
-				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
 				System.out.println("Dime el nombre del fichero:");
 				// "commons-net-3.6.jar"
-				String remote_filename = Leer.pedirCadena();
-				ftpClient.changeWorkingDirectory(remote_working_dir_path);
-				String local_filepath = "C:\\Users\\1DAM\\Desktop\\Filezilla\\";
-				FileInputStream fis = new FileInputStream(local_filepath);
+				String remote_filename = "subida.txt";
+				String local_filepath = "C:\\Users\\Jame Ops\\Desktop\\Filezilla";
+				FileInputStream fis = new FileInputStream(local_filepath+"\\"+remote_filename);
 				boolean uploadFile = ftpClient.storeFile(remote_filename, fis);
 				if (uploadFile == false) {
 					System.out.println("Error al subir el fichero");
@@ -89,14 +83,14 @@ public class HttpClient {
 				break;
 			case 5:
 				System.out.println("Introduce el nombre del fichero que se quiere descargar");
-				String remoteFile1 = "/Lol.txt";
-	            File downloadFile1 = new File("C:\\Users\\1DAM\\Desktop\\imagen.jpeg");
-	            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1));
+				String remoteFile1 = "descarga.txt";
+	            File downloadFile1 = new File("C:\\Users\\Jame Ops\\Desktop");
+	            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1+"\\"+remoteFile1));
 	            boolean success = ftpClient.retrieveFile(remoteFile1, outputStream1);
 	            outputStream1.close();
 	 
 	            if (success) {
-	                System.out.println("File #1 has been downloaded successfully.");
+	                System.out.println("Descarga completada con exito.");
 	            }else {
 	            	System.out.println("No se pudo descargar el archivo");
 	            }
@@ -104,8 +98,8 @@ public class HttpClient {
 				break;
 			case 6:
 				System.out.println("Introduce el nombre del fichero a eliminar");
-				String aEliminar=Leer.pedirCadena();
-				String filename = "/"+aEliminar+".txt";
+				String aEliminar="subida.txt";
+				String filename = "\\"+aEliminar;
 
 				boolean exist = ftpClient.deleteFile(filename);
 				 
@@ -118,7 +112,7 @@ public class HttpClient {
 			case 7:
 				System.out.println("Introduce el nombre del directorio a eliminar");
 				String aEliminar2=Leer.pedirCadena();
-				String filename2 = "/"+aEliminar2+".txt";
+				String filename2 = aEliminar2;
 
 				boolean exist2 = ftpClient.removeDirectory(filename2);
 				 
@@ -140,8 +134,18 @@ public class HttpClient {
 				}
 				break;
 			case 9:
+				System.out.println("Dime el nombre del directorio a cambiar:");
+				String directorioC = Leer.pedirCadena();
+				if (directorioC.equals("..")) {
+					ftpClient.changeToParentDirectory();
+				} else {
+					ftpClient.changeWorkingDirectory(directorioC);
+					System.out.println("Directorio actual: " + ftpClient.printWorkingDirectory());
+				}
+				
 				break;
 			case 10:
+				
 				break;
 			case 11:
 				break;
